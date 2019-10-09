@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sshrike
+    username: sshrike
+    password: sshrike
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
