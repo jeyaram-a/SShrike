@@ -4,19 +4,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Question {
+public class Question implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(generator="question_id_seq")
+    @SequenceGenerator(name="question_id_seq",sequenceName="question_id_seq", allocationSize=1)
     private Long id;
+
+    String question;
 
     private QuestionType type;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Answer> offeredAnswers;
 }

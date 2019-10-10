@@ -5,19 +5,23 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class SurveyUser {
+public class SurveyUser implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(generator="survey_user_id_seq")
+    @SequenceGenerator(name="survey_user_id_seq",sequenceName="survey_user_id_seq", allocationSize=1)
     private Long id;
 
     @NotNull

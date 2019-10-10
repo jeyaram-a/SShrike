@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="initial setup" author="ja">
+        <sql>
+            CREATE TABLE public.answer (
+            id BIGSERIAL NOT NULL,
+            answer varchar(255) NULL,
+            CONSTRAINT answer_pkey PRIMARY KEY (id)
+            );
+
+            CREATE TABLE public.question (
+            id BIGSERIAL NOT NULL,
+            question varchar(255) NULL,
+            "type" int4 NULL,
+            CONSTRAINT question_pkey PRIMARY KEY (id)
+            );
+
+            CREATE TABLE public.question_offered_answers (
+            question_id BIGINT NOT NULL,
+            offered_answers_id BIGINT NOT NULL,
+            CONSTRAINT uk_f5h5rdvwy5l42uo1j6ucspbg5 UNIQUE (offered_answers_id)
+            );
+
+            ALTER TABLE public.question_offered_answers ADD CONSTRAINT fk34kcx2tq073qvt8lfhyfq7ple FOREIGN KEY (question_id) REFERENCES question(id);
+            ALTER TABLE public.question_offered_answers ADD CONSTRAINT fkbcg1syoj8og467rwuq0frdsna FOREIGN KEY (offered_answers_id) REFERENCES answer(id);
+
+
+            CREATE TABLE public.survey (
+            id BIGSERIAL NOT NULL,
+            "name" varchar(255) NULL,
+            created_by_id BIGINT NULL,
+            CONSTRAINT survey_pkey PRIMARY KEY (id)
+            );
+
+            CREATE TABLE public.survey_user (
+            id BIGSERIAL NOT NULL,
+            email_id varchar(255) NOT NULL,
+            first_name varchar(255) NOT NULL,
+            last_name varchar(255) NOT NULL,
+            password_salt varchar(255) NOT NULL,
+            CONSTRAINT survey_user_pkey PRIMARY KEY (id)
+            );
+
+
+            ALTER TABLE public.survey ADD CONSTRAINT fkmlyuvm2px6wv9oxx1bqdwknt6 FOREIGN KEY (created_by_id) REFERENCES survey_user(id);
+
+
+            CREATE TABLE public.survey_questions (
+            survey_id BIGINT NOT NULL,
+            questions_id BIGINT NOT NULL,
+            CONSTRAINT uk_hfqoodsjgij7codotc4t0glan UNIQUE (questions_id)
+            );
+
+            ALTER TABLE public.survey_questions ADD CONSTRAINT fk6d3brrwy6141fd7375ux6udnx FOREIGN KEY (survey_id) REFERENCES survey(id);
+            ALTER TABLE public.survey_questions ADD CONSTRAINT fkml7w5dahevanwom13tup9vt30 FOREIGN KEY (questions_id) REFERENCES question(id);
+
+
+
+            CREATE TABLE public.provided_answer (
+            id BIGSERIAL NOT NULL,
+            answer_id int8 NULL,
+            question_id int8 NULL,
+            survey_id int8 NULL,
+            user_id int8 NULL,
+            CONSTRAINT provided_answer_pkey PRIMARY KEY (id)
+            );
+
+            ALTER TABLE public.provided_answer ADD CONSTRAINT fk1fivdjg6y5d8vrh75pculp2u1 FOREIGN KEY (question_id) REFERENCES question(id);
+            ALTER TABLE public.provided_answer ADD CONSTRAINT fk60b5kovcr3hwlsy4bytmjduvv FOREIGN KEY (user_id) REFERENCES survey_user(id);
+            ALTER TABLE public.provided_answer ADD CONSTRAINT fk8mcp01mcffvidxrqfukjw6ncd FOREIGN KEY (survey_id) REFERENCES survey(id);
+            ALTER TABLE public.provided_answer ADD CONSTRAINT fk950auec0rlmlmdg9cuudlbx2u FOREIGN KEY (answer_id) REFERENCES answer(id);
+        </sql>
+
+    </changeSet>
+</databaseChangeLog>
