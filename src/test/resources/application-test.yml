@@ -15,6 +15,13 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+    security:
+      basic:
+        enabled: false
+
+security:
+  basic:
+    enabled: false
 
 amazon:
   s3:

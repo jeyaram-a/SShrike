@@ -10,8 +10,12 @@ import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,8 +29,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(secure = false)
 @ExtendWith(SpringExtension.class)
+@EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
+@ActiveProfiles("test")
 public class SurveyIntegrationTest {
 
     @Autowired
@@ -45,6 +51,7 @@ public class SurveyIntegrationTest {
     }
 
     @Test
+    @WithMockUser(value = "user")
     public void test_save() throws Exception {
         Survey survey = new Survey();
         survey.setCreatedBy(user);
@@ -61,6 +68,7 @@ public class SurveyIntegrationTest {
     }
 
     @Test
+    @WithMockUser(value = "user")
     public void test_get() throws Exception {
 
         mockMvc.perform(get("/survey/1"))
@@ -73,6 +81,7 @@ public class SurveyIntegrationTest {
     }
 
     @Test
+    @WithMockUser(value = "user")
     public void test_delete() throws Exception {
 
         mockMvc.perform(delete("/survey/1"))
