@@ -2,6 +2,8 @@ package io.github.jeyaram.surveyshrike.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @NoArgsConstructor
+@RequiredArgsConstructor
 public class Answer implements Serializable {
 
     @Id
@@ -21,5 +24,6 @@ public class Answer implements Serializable {
     private Long id;
 
     @Length(min = 1)
+    @NonNull
     String answer;
 }

@@ -10,7 +10,6 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 @Log4j2
@@ -20,15 +19,13 @@ public class SurveyService {
     private SurveyRepository surveyRepository;
 
     @Cacheable(value = "surveys", key="#surveyId")
-    public Survey getSurveyQuestionForSurveyId(Long surveyId) {
+    public Survey getSurvey(Long surveyId) {
         log.info(surveyId);
-        Optional<Survey> surveyOptional = surveyRepository.findById(surveyId);
-        return  surveyOptional.orElseThrow(() -> new ResourceNotFoundException(surveyId.toString()));
+        return surveyRepository.findById(surveyId).orElseThrow(() -> new ResourceNotFoundException(surveyId.toString()));
     }
 
     @CachePut(value = "surveys", key = "#survey.id")
     public Survey save(Survey survey) {
-        log.info("here");
         return surveyRepository.save(survey);
     }
 

@@ -13,6 +13,6 @@ public class ProvidedAnswerRequestParam {
 
     private Long answerId;
 
-    private Long userId;
+    private String userId;
 
 }

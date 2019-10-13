@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 @ControllerAdvice
 @Log4j2
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(UnsatisfiedConditionException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public String handleUnsatisfiedConditionException(HttpServletRequest request, Exception ex) {
         return ex.getMessage();
     }
@@ -23,6 +24,11 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND,reason = "Resource not found")
     public void handleResourceNotFoundException(HttpServletRequest request, Exception ex) {
+    }
+
+    @ExceptionHandler(IOException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR,reason = "Error while pushing file to s3")
+    public void handleIOExceptionInPushingToS3(HttpServletRequest request, Exception ex) {
     }
 
 

@@ -1,19 +1,14 @@
 spring:
   liquibase:
-    enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/sshrike
+    url: jdbc:postgresql://localhost:5432/sshrike_test
     username: sshrike
     password: sshrike
-  cache:
-    type: redis
-    host: localhost
-    port: 6379
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
       dialect: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:

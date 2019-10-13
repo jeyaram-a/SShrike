@@ -6,9 +6,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
@@ -19,10 +17,11 @@ import java.io.Serializable;
 @RequiredArgsConstructor
 public class SurveyUser implements Serializable {
 
+    @NotNull
+    @NonNull
+    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
     @Id
-    @GeneratedValue(generator="survey_user_id_seq")
-    @SequenceGenerator(name="survey_user_id_seq",sequenceName="survey_user_id_seq", allocationSize=1)
-    private Long id;
+    private String emailId;
 
     @NotNull
     @NonNull
@@ -34,11 +33,6 @@ public class SurveyUser implements Serializable {
 
     @NotNull
     @NonNull
-    @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$")
-    private String emailId;
-
-    @NotNull
-    @NonNull
-    private String passwordSalt;
+    private String password;
 
 }

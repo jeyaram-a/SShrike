@@ -29,7 +29,6 @@ public class PutController {
             x.getOfferedAnswers().forEach( y -> y.setId(null));
             x.setId(null);
         });
-        myPojo.getCreatedBy().setId(null);
         myPojo.getCreatedBy().setEmailId("jj@gg.com");
 
         ResponseEntity<Survey> response = template.postForEntity("http://localhost:8080/survey", myPojo, Survey.class);
@@ -39,7 +38,7 @@ public class PutController {
 
     @GetMapping("/put/pa")
     public  void putPa() {
-        ProvidedAnswerRequestParam param = new ProvidedAnswerRequestParam(1L, 2L, 3L,4L);
+        ProvidedAnswerRequestParam param = new ProvidedAnswerRequestParam(1L, 2L, 3L,"jj@gg.com");
         RestTemplate template = new RestTemplate();
 
         ResponseEntity<ProvidedAnswer> response=template.postForEntity("http://localhost:8080/save/answer", param, ProvidedAnswer.class);
