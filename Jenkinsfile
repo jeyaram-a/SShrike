@@ -21,11 +21,11 @@ pipeline {
         }
         stage('Deliver') {
             steps{
-                sh "ssh j@172.17.0.1 rm -rf /home/Documents/exe"
+                sh "ssh j@172.17.0.1 rm -rf /home/j/Documents/exe"
 
-                sh "ssh j@172.17.0.1 mkdir -p /home/Documents/exe"
+                sh "ssh j@172.17.0.1 mkdir -p /home/j/Documents/exe"
 
-                sh "scp -r target j@172.17.0.1:/home/Documents/exe/"
+                sh "scp -r target j@172.17.0.1:/home/j/Documents/exe/"
             }
         }
     }
