@@ -21,11 +21,7 @@ pipeline {
         }
         stage('Deliver') {
             steps{
-                sh "ssh j@localhost rm -rf /home/j/Documents/exe"
-
-                sh "ssh j@localhost mkdir -p /home/j/Documents/exe"
-
-                sh "scp -r target j@172.17.0.1:/home/j/Documents/exe/"
+               nohup java -jar ./target/*.jar &
             }
         }
     }
