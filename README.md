@@ -16,7 +16,7 @@ SurveyShrike is a java-11, spring-boot project with redis caching and uses amazo
 Follow the instructions for debian based linux distros
 
 - JDK
- ```sh
+ ```
 $ sudo apt update
 $ sudo apt install openjdk-11-jre openjdk-11-jdk
 ```
@@ -29,7 +29,7 @@ Other wise
     * Add bin to the Path variable => PATH=$PATH:${MAVEN_HOME}/bin
 
 - Redis
-         ```sh
+         ```
         $ sudo apt install redis-server
         ```
 
@@ -48,7 +48,7 @@ Other wise
     ```
 
 - Docker
-        ```sh
+        ```
         $ sudo apt install docker.io
         # To start
         $ sudo systemctl start docker
@@ -56,30 +56,30 @@ Other wise
         $ sudo systemctl stop docker
         ```
 - Git
-        ```sh
+        ```
         $ apt install git-core
         ```
 
 ### Starting the application
 - Clone the project
-        ```sh
+        ```
         $ git clone https://github.com/jeyaram-a/SShrike.git
         ```
 
 - Move to the directory
-        ```sh
+        ```
         $ cd sshrike
         ```
 
 - Compile the code
-        ```sh
+        ```
         $ mvn clean install
         ```
 
 - Start the application
     * Liquibase will do initialization of tables
     *  command to start application
-            ```sh
+            ```
             $ java -jar sshrike*.jar
             ```
 - Visit swagger page
@@ -109,8 +109,8 @@ Other wise
 
 ##CI|CD Pipeline
 - Run the following command to install jenkins in docker
-        ```sh
-        docker run \
+        ```
+        $ docker run \
           -u root \
           --rm \
           -d \
