@@ -107,7 +107,7 @@ Other wise
         * Use that id to store the offered answer using **/answer/save** endpoint
 
 
-##CI|CD Pipeline
+## CI|CD Pipeline
 - Run the following command to install jenkins in docker
         ```
         $ docker run \
