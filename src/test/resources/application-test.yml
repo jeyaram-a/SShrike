@@ -25,5 +25,5 @@ security:
 
 amazon:
   s3:
-    accessKey: AKIAIYPRJ33PIEUVBHIQ
-    secretKey: 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
+    accessKey: key
+    secretKey: secret
