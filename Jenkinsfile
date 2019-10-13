@@ -24,7 +24,7 @@ pipeline {
 
             sh "ssh j@172.17.0.1 mkdir -p /home/Documents/exe"
 
-            sh "scp -r target j@172.17.0.1:/home/Documents/exe/""
+            sh "scp -r target j@172.17.0.1:/home/Documents/exe/"
         }
     }
 }
