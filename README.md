@@ -92,6 +92,7 @@ Other wise
 
 ### Schema Information
 - ER - Diagram
+
 ![Alt text](images/er.png?raw=true "ER")
 
 
@@ -124,6 +125,7 @@ Other wise
 - This pipeline clones the projects, builds and installs in the local system
 
 
+![Alt text](images/jenkins.png?raw=true "ER")
 
 
 
